@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Concert+One&display=swap');
+.Header{
+    display : flex;
+    padding: 10px 20px;
+    background-color: #aa1f23;
+    color: #ffff;
+    position : relative ;
+    height:  5rem ;    
+}
+.logo-store{
+    font-family: 'Concert One', cursive;
+}
+.slogan{
+
+}
+.search-bar{
+
+    .search-icon{}
+    .search-input{}
+}
+.deader{
+
+    .deader-icon{}
+    .deader-description{}
+}
+.my-account{
+
+    .my-account-icon{}
+    .my-account-description{}
+}
+.cart{
+    position :absolute ;
+    right : 10px ;
+    top  : 0px ;
+    bottom: 0px;
+}

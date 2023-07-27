@@ -1,0 +1,23 @@
+.wrapper{
+    display: flex;
+    background: #ffff;
+    width: fit-content;
+    padding: 24px 24px;
+    border-radius: 1% ;
+    position: absolute;
+    top :30% ;
+    left: 30% ;
+}
+.login-form-account{
+    width: 25vw;
+}
+
+.bulkhead{
+    padding : 0 16px ;
+}
+
+.title-login1 , .title-login2{
+    font-weight: 600;
+    font-size: 1.2rem
+
+}

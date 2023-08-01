@@ -10,6 +10,7 @@ import { useState } from "react";
 
 const cx = classNames.bind(styles) ;
 function Header() {
+       const [login , setLogin] = useState(true) ;
        const [open  , setOpen] = useState(false) ;
        const handleOpen = () => setOpen(true) ;
        const handleClose =  () => setOpen(false) ;
@@ -26,11 +27,11 @@ function Header() {
                      <div className={cx("search-bar")}>
                            <SearchBar/>
                      </div>
-               <div className={cx("btn-login")}>
+              {!login ?<div>avatar</div> : <div className={cx("btn-login")}>
                   <ThemeProviderComponent comp={Button} themeCustom={themeButton} color="primary" variant="normal" onClick ={handleOpen} startIcon ={<PersonOutlineRounded color="info"/>}>
                        <ThemeProviderComponent comp={Typography} themeCustom={PrimaryTypography}  color="primary" variant ="typeSmall" >Account </ThemeProviderComponent>
                   </ThemeProviderComponent>
-               </div>
+               </div>} 
                    <Modal
                      open ={open} 
                      onClose={handleClose}

@@ -1,6 +1,6 @@
 import  axios from  "~/axios"
 
- const handleLoginApi =  (data) => {
-    return axios.post('login',{data} ) ;
+ const handleLoginApi = async  (data) => {
+    return  await axios.post('api/login',data );
 } 
 export default handleLoginApi ;

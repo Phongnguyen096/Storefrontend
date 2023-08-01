@@ -8,14 +8,13 @@ import { themeButton } from "../ThemeStyle";
 import handleLoginApi from "~/services/userService";
 const cx = classNames.bind(styles) ;
 function LoginForm() {
-  const handleSubmit = async (event) => {
+  const handleSubmit = async(event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    await handleLoginApi(data) ;
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    let email = data.get("email") 
+    let password =  data.get("password")
+    let res =(await handleLoginApi({email , password})).data ;
+    console.log(res) ;
   };
     return ( <div className={cx("wrapper")}>
           <div className={cx("login-form-account")}>

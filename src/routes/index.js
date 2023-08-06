@@ -1,12 +1,10 @@
-import Home from "~/pages/Home";
-import Products from "~/pages/Products";
+import Home from '~/pages/Home';
+import Products from '~/pages/Products';
 const publicRoutes = [
-    {path:'/',component:Home} ,
-    {path:'/products',component:Products} 
-]
+    { path: '/', component: Home },
+    { path: '/products', component: Products },
+];
 
-const privateRoutes = [
+const privateRoutes = [];
 
-]
-
-export {publicRoutes , privateRoutes} 
+export { publicRoutes, privateRoutes };

@@ -1,18 +1,17 @@
 import classNames from 'classnames/bind';
 import { TextField, Box, FormControlLabel, Checkbox, Button, Grid, Link, Divider } from '@mui/material';
 import { Google, Facebook } from '@mui/icons-material';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import React from 'react';
 
 import styles from './LoginForm.module.scss';
-import ThemeProviderComponent from '../ThemeProvider';
-import { themeButton } from '../ThemeStyle';
+import { CustomComponentMUI } from '~/components/CustomMetarialUI';
+import { themeButton } from '~/components/CustomMetarialUI/ThemeStyle';
 import handleLoginApi from '~/services/userService';
 import { userSlice } from '~/features/user/UserSlice';
 const cx = classNames.bind(styles);
 const LoginForm = React.forwardRef(({ handleClose }, ref) => {
     const dispatch = useDispatch();
-    const login = useSelector((state) => state.isLogin);
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -73,7 +72,7 @@ const LoginForm = React.forwardRef(({ handleClose }, ref) => {
             </div>
             <div className={cx('login-form-another')}>
                 <div className={cx('title-login2')}>Login with another provider</div>
-                <ThemeProviderComponent
+                <CustomComponentMUI
                     comp={Button}
                     themeCustom={themeButton}
                     startIcon={<Google />}
@@ -83,8 +82,8 @@ const LoginForm = React.forwardRef(({ handleClose }, ref) => {
                     sx={{ mt: 3, mb: 2 }}
                 >
                     Google
-                </ThemeProviderComponent>
-                <ThemeProviderComponent
+                </CustomComponentMUI>
+                <CustomComponentMUI
                     comp={Button}
                     themeCustom={themeButton}
                     startIcon={<Facebook />}
@@ -94,7 +93,7 @@ const LoginForm = React.forwardRef(({ handleClose }, ref) => {
                     sx={{ mt: 3, mb: 2 }}
                 >
                     Facebook
-                </ThemeProviderComponent>
+                </CustomComponentMUI>
             </div>
         </div>
     );

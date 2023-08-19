@@ -8,6 +8,9 @@ const themeButton = createTheme({
             main: '#64748B',
             contrastText: '#fff',
         },
+        red: {
+            main: '#aa1f23',
+        },
     },
     components: {
         MuiButton: {
@@ -16,6 +19,7 @@ const themeButton = createTheme({
                     props: { variant: 'normal' },
                     style: {
                         textTransform: 'none',
+                        height: '100%',
                     },
                 },
             ],
@@ -44,6 +48,9 @@ const PrimaryTypography = createTheme({
         typeMedium: {
             fontSize: '1.4rem',
         },
+        typeLarge: {
+            fontSize: '3rem',
+        },
     },
     palette: {
         primary: {
@@ -62,4 +69,22 @@ const customTextField = createTheme({
     },
 });
 
-export { themeButton, LogoTypography, PrimaryTypography, customTextField };
+// popper
+const PopoverTheme = createTheme({
+    components: {
+        MuiPopover: {
+            styleOverrides: {
+                paper: {
+                    width: '100%',
+                    height: '70%',
+                    boxShadow: 'none',
+                    marginTop: '4px',
+                    maxWidth: '100%',
+                    paddingLeft: '16px',
+                },
+            },
+        },
+    },
+});
+
+export { themeButton, LogoTypography, PrimaryTypography, customTextField, PopoverTheme };

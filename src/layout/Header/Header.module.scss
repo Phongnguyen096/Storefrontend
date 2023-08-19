@@ -1,17 +1,20 @@
 .wrapper {
     display: block;
     width: 100%;
+    background-color: #238fe2;
 }
 .nav-element {
-    background-color: #238fe2;
+   
     display: inline-flex;
     width: 100%;
     align-items: center;
-    justify-content: space-evenly;
     height: 4rem;
+    padding: 0 16vw ;
 }
 .logo-content {
     display: inline-flex;
+    padding-right: 5vw ;
+    padding-left: 1vw;
 }
 .logo {
     padding: 0, 15px;
@@ -20,18 +23,28 @@
 .slogan {
     padding: 0 15px;
     margin-right: 5px;
+    min-width : 120px ;
 }
 
 .search-bar {
     display: inline;
-    padding-right: 30px;
+    padding-right: 5vw ;
 }
 .btn-login {
 }
 
-.list-product {
+.header-bar {
     width: 100%;
     height: 3rem;
     background-color: #393636;
     color: white;
+    padding-left: 16vw ;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px #000;
+}
+
+.button-header-bar{
+    margin-right: 20px;
+    height: 100%;
 }

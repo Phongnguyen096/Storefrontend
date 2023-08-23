@@ -1,0 +1,30 @@
+.wrapper{
+    width: 25%;
+}
+.image{
+    width: 100%;
+    text-align: center;
+    img{
+       width: 90% ;
+        height: 10rem;
+        object-fit: cover;
+    }
+}
+.name{
+    width: 100%;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding-top:15px ;
+}
+.price{
+    text-align: center;
+    padding: 1rem 0;
+    font-size: 1rem;
+}
+
+.btn-add-cart ,.btn-view-detail {
+    width: 100% ;
+    text-align: center;
+    padding-bottom: 15px;
+}

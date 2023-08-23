@@ -1,3 +1,15 @@
 .image-side{
     display : flex ;
 }
+
+.product-pick-model{
+    padding-top: 6rem;
+    .title-pick-model{
+        width : 100% ;
+        text-align: center;
+        font-weight: 600;
+    }
+    .best-product{
+        padding: 4vh 16vw;
+    }
+}

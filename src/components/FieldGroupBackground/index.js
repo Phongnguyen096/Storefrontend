@@ -11,33 +11,38 @@ function FieldGroupBackground({ textContent, textDescription }) {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('content')}>
-                <CustomComponentMUI
-                    comp={Typography}
-                    themeCustom={PrimaryTypography}
-                    color="primary"
-                    variant="typeLarge"
-                >
-                    {textContent}
-                </CustomComponentMUI>
-                <CustomComponentMUI
-                    comp={Typography}
-                    themeCustom={PrimaryTypography}
-                    color="primary"
-                    variant=" typeMedium"
-                >
-                    {textDescription}
-                </CustomComponentMUI>
-                <div>{textDescription}</div>
-                <CustomComponentMUI comp={Button} color="red" themeCustom={themeButton} variant="contained">
+                <div className={cx('title')}>
                     <CustomComponentMUI
                         comp={Typography}
                         themeCustom={PrimaryTypography}
                         color="primary"
-                        variant=" typeMedium"
+                        variant="typeLarge"
                     >
-                        Shop now
+                        {textContent}
                     </CustomComponentMUI>
-                </CustomComponentMUI>
+                </div>
+                <div className={cx('description')}>
+                    <CustomComponentMUI
+                        comp={Typography}
+                        themeCustom={PrimaryTypography}
+                        color="primary"
+                        variant="typeMedium"
+                    >
+                        {textDescription}
+                    </CustomComponentMUI>
+                </div>
+                <div className={cx('btn-shopping')}>
+                    <CustomComponentMUI comp={Button} themeCustom={themeButton} variant="redBackground">
+                        <CustomComponentMUI
+                            comp={Typography}
+                            themeCustom={PrimaryTypography}
+                            color="primary"
+                            variant="typeSmall"
+                        >
+                            Shop now
+                        </CustomComponentMUI>
+                    </CustomComponentMUI>
+                </div>
             </div>
         </div>
     );

@@ -22,6 +22,24 @@ const themeButton = createTheme({
                         height: '100%',
                     },
                 },
+                {
+                    props: { variant: 'redBackground' },
+                    style: {
+                        minWidth: '150px',
+                        backgroundColor: '#aa1f23',
+                        textTransform: 'none',
+                        '&:hover': {
+                            backgroundColor: 'black',
+                        },
+                    },
+                },
+                {
+                    props: { variant: 'outline2' },
+                    style: {
+                        minWidth: '200px',
+                        border: '1px solid',
+                    },
+                },
             ],
         },
     },
@@ -51,10 +69,16 @@ const PrimaryTypography = createTheme({
         typeLarge: {
             fontSize: '3rem',
         },
+        typeTitle: {
+            fontSize: '3rem',
+        },
     },
     palette: {
         primary: {
             main: '#ffff',
+        },
+        secondary: {
+            main: '#0000',
         },
     },
 });
@@ -81,6 +105,7 @@ const PopoverTheme = createTheme({
                     marginTop: '4px',
                     maxWidth: '100%',
                     paddingLeft: '16px',
+                    marginLeft: '16px',
                 },
             },
         },

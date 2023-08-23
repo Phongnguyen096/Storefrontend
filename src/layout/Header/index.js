@@ -1,16 +1,17 @@
-import { Button, Link, Typography, IconButton, Popover } from '@mui/material';
+import { Button, Link, Typography, IconButton } from '@mui/material';
 import classNames from 'classnames/bind';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './Header.module.scss';
-import { PersonOutlineRounded, Logout, KeyboardArrowDown } from '@mui/icons-material';
+import { PersonOutlineRounded, Logout } from '@mui/icons-material';
 import React, { useState } from 'react';
 
-import { themeButton, LogoTypography, PrimaryTypography, PopoverTheme } from '~/components/CustomMetarialUI/ThemeStyle';
+import { themeButton, LogoTypography, PrimaryTypography } from '~/components/CustomMetarialUI/ThemeStyle';
 import { CustomComponentMUI } from '~/components/CustomMetarialUI';
 import SearchBar from '../../components/SearchBar';
 import { userSlice } from '~/features/user/UserSlice';
 import ModalLoginForm from '~/components/LoginForm/ModalLoginForm';
 import { HeaderContent, HeaderBar } from '~/config/Constants.config';
+import DropDownMenu from '~/components/DropdownMenu';
 
 const cx = classNames.bind(styles);
 function Header() {
@@ -28,14 +29,6 @@ function Header() {
     };
 
     //State open menu from header bar
-    const [anchorEl, setAnchorEl] = useState(null);
-    const openMenu = Boolean(anchorEl);
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-    const handleCloseMenu = () => {
-        setAnchorEl(null);
-    };
 
     return (
         <div className={cx('wrapper')}>
@@ -97,37 +90,7 @@ function Header() {
             <div className={cx('header-bar')}>
                 {HeaderBar.map((item) => (
                     <div key={item.index} className={cx('button-header-bar')}>
-                        <CustomComponentMUI
-                            id={cx(`header-bar-button-${item.name}`)}
-                            item={item}
-                            comp={Button}
-                            themeCustom={themeButton}
-                            color="primary"
-                            variant="normal"
-                            endIcon={<KeyboardArrowDown />}
-                            onClick={handleClick}
-                            aria-controls={openMenu ? cx(`header-bar-menu-${item.name}`) : undefined}
-                            aria-haspopup="true"
-                            aria-expanded={openMenu ? 'true' : undefined}
-                            disableElevation
-                        >
-                            {item.name}
-                        </CustomComponentMUI>
-                        <CustomComponentMUI
-                            comp={Popover}
-                            themeCustom={PopoverTheme}
-                            id={cx(`header-bar-menu-${item.name}`)}
-                            open={openMenu}
-                            anchorEl={anchorEl}
-                            onClose={handleCloseMenu}
-                            anchorOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'left',
-                            }}
-                            anchorPosition={{ left: 0, top: 160 }}
-                        >
-                            {item.name}
-                        </CustomComponentMUI>
+                        <DropDownMenu nameBtn={item.name}>{item.name}</DropDownMenu>
                     </div>
                 ))}
             </div>

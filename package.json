@@ -43,6 +43,7 @@
     ]
   },
   "devDependencies": {
+    "@mui/x-data-grid": "^6.11.2",
     "@reduxjs/toolkit": "^1.9.5",
     "axios": "^1.4.0",
     "classnames": "^2.3.2",

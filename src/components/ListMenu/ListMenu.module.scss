@@ -1,0 +1,40 @@
+.wrapper{
+    width : fit-content ;
+    padding: 1rem;
+    min-width: 12vw;
+}
+.title-menu{
+    cursor: pointer;
+}
+.content-menu{
+    padding:5px 0;
+    margin: 10px 0;
+    li{
+        width: 100%;
+        list-style-type: none;
+        padding : 10px 0;
+        a{
+            text-decoration: none;
+            font-size: 1rem;
+            font-family: 'PT Sans', sans-serif;
+            
+        }
+        a:hover{
+            color: #aa1f23;
+        }
+    }
+}
+
+.white-color{
+    color:#ffff;
+}
+
+.default-color{
+    color: rgba(0,0,0,1);
+}
+.border-color{
+    border-top: 1px solid #D7B98A
+}
+.border-default{
+    border-top: 1px solid  rgba(0,0,0,1) ;
+}

@@ -1,7 +1,7 @@
 import axios from '~/axios';
 
 const getProduct = async (inputId) => {
-    return await axios.get(`api/products?id=${inputId}`, { id: inputId });
+    return await axios.get(`product/get-product?id=${inputId}`, { id: inputId });
 };
 
 const productService = {

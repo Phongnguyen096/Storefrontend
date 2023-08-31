@@ -1,15 +1,29 @@
 import classNames from 'classnames/bind';
-import { Typography } from '@mui/material';
+import { Typography, Button } from '@mui/material';
+import { ArrowForwardIosOutlined } from '@mui/icons-material';
+import { useState, useEffect } from 'react';
 
 import styles from './Home.module.scss';
 import FieldGroupBackground from '~/components/FieldGroupBackground';
 import { CustomComponentMUI } from '~/components/CustomMetarialUI';
 import { PrimaryTypography } from '~/components/CustomMetarialUI/ThemeStyle';
 import Header from '~/layout/Header';
-import CardInfomation from '~/components/CardInfomation';
+import ProductCard from '~/components/ProductCard';
+import productService from '~/services/productService';
+import { themeButton } from '~/components/CustomMetarialUI/ThemeStyle';
+import Footer from '~/layout/Footer';
 
 const cx = classNames.bind(styles);
 function Home() {
+    const [topProduct, setTopProduct] = useState([]);
+    useEffect(() => {
+        return async () => {
+            let responseProduct = await productService.getProduct('TOP');
+            if (responseProduct && responseProduct.data.errorCode === 0) {
+                setTopProduct(responseProduct.data.product);
+            }
+        };
+    }, []);
     return (
         <div className={cx('wrapper')}>
             <Header />
@@ -25,10 +39,27 @@ function Home() {
                         Product Pick Models
                     </CustomComponentMUI>
                 </div>
-                <div className={cx('best-product')}>
-                    <CardInfomation />
+                <div className={cx('top-product')}>
+                    {topProduct.map((item, index) => {
+                        return (
+                            <div key={index} className={cx('top-product-item')}>
+                                <ProductCard name={item.name} price={item.price} imgUrl={item.imgUrl} />
+                                <div className={cx('btn-view-detail')}>
+                                    <CustomComponentMUI
+                                        comp={Button}
+                                        themeCustom={themeButton}
+                                        variant="outline2"
+                                        endIcon={<ArrowForwardIosOutlined />}
+                                    >
+                                        View Detail
+                                    </CustomComponentMUI>
+                                </div>
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
+            <Footer />
         </div>
     );
 }

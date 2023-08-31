@@ -4,7 +4,11 @@ export const userSlice = createSlice({
     name: 'user',
     initialState: {
         isLogin: false,
-        userInfo: {},
+        userInfo: {
+            data: {
+                roleId: '',
+            },
+        },
     },
     reducers: {
         userLoginSuccess: (state, action) => {
@@ -16,6 +20,11 @@ export const userSlice = createSlice({
         },
         userLogout: (state, action) => {
             state.isLogin = false;
+            state.userInfo = {
+                user: {
+                    roleId: '',
+                },
+            };
         },
     },
 });

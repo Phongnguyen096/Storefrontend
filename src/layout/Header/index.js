@@ -10,8 +10,10 @@ import { CustomComponentMUI } from '~/components/CustomMetarialUI';
 import SearchBar from '../../components/SearchBar';
 import { userSlice } from '~/features/user/UserSlice';
 import ModalLoginForm from '~/components/LoginForm/ModalLoginForm';
-import { HeaderContent, HeaderBar } from '~/config/Constants.config';
+import { HeaderBar } from '~/config/Constants.config';
 import DropDownMenu from '~/components/DropdownMenu';
+import { HEADER_TEXT } from '~/config/Constant';
+import ListMenu from '~/components/ListMenu';
 
 const cx = classNames.bind(styles);
 function Header() {
@@ -43,22 +45,22 @@ function Header() {
                                 color="primary"
                                 type="button"
                             >
-                                {HeaderContent.LogoText}
+                                {HEADER_TEXT.LOGO}
                             </CustomComponentMUI>
                         </Link>
                     </div>
                     <div className={cx('slogan')}>
                         <CustomComponentMUI comp={Typography} themeCustom={PrimaryTypography} color="primary">
-                            {HeaderContent.SloganText}
+                            {HEADER_TEXT.SLOGAN}
                         </CustomComponentMUI>
                     </div>
                 </div>
                 <div className={cx('search-bar')}>
                     <SearchBar />
                 </div>
-                {userSelector.isLogin ? (
+                {userSelector.isLogin && userSelector.userInfo.user.roleId === '2' ? (
                     <div>
-                        {userSelector.userInfo.user.email}
+                        {userSelector.userInfo.user.roleId}
                         <IconButton aria-label="logout" onClick={handleLogout}>
                             <Logout />
                         </IconButton>
@@ -79,7 +81,7 @@ function Header() {
                                 color="primary"
                                 variant="typeSmall"
                             >
-                                {HeaderContent.textBnt}
+                                {HEADER_TEXT.LOGIN_BTN}
                             </CustomComponentMUI>
                         </CustomComponentMUI>
                     </div>
@@ -90,7 +92,13 @@ function Header() {
             <div className={cx('header-bar')}>
                 {HeaderBar.map((item) => (
                     <div key={item.index} className={cx('button-header-bar')}>
-                        <DropDownMenu nameBtn={item.name}>{item.name}</DropDownMenu>
+                        <DropDownMenu nameBtn={item.name}>
+                            {item.listMenu
+                                ? item.listMenu.map((e, index) => (
+                                      <ListMenu key={index} title={e.title} content={e.content} />
+                                  ))
+                                : ''}
+                        </DropDownMenu>
                     </div>
                 ))}
             </div>

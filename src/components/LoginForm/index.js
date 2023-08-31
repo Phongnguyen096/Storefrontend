@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import { TextField, Box, FormControlLabel, Checkbox, Button, Grid, Link, Divider } from '@mui/material';
+import { Box, FormControlLabel, Checkbox, Button, Grid, Link, Divider, OutlinedInput } from '@mui/material';
 import { Google, Facebook } from '@mui/icons-material';
 import { useDispatch } from 'react-redux';
 import React from 'react';
@@ -7,19 +7,24 @@ import React from 'react';
 import styles from './LoginForm.module.scss';
 import { CustomComponentMUI } from '~/components/CustomMetarialUI';
 import { themeButton } from '~/components/CustomMetarialUI/ThemeStyle';
-import handleLoginApi from '~/services/userService';
+import userService from '~/services/userService';
 import { userSlice } from '~/features/user/UserSlice';
+import { useNavigate } from 'react-router-dom';
 const cx = classNames.bind(styles);
 const LoginForm = React.forwardRef(({ handleClose }, ref) => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         let email = data.get('email');
         let password = data.get('password');
-        let res = (await handleLoginApi({ email, password })).data;
+        let res = (await userService.handleLoginApi({ email, password })).data;
         if (res.errCode === 1) {
             dispatch(userSlice.actions.userLoginSuccess(res));
+            if (res.user.roleId === '1') {
+                navigate('/admin');
+            }
             handleClose();
         }
     };
@@ -28,25 +33,25 @@ const LoginForm = React.forwardRef(({ handleClose }, ref) => {
             <div className={cx('login-form-account')}>
                 <div className={cx('title-login1')}>Login into your account</div>
                 <Box component="form" noValidate sx={{ mt: 1 }} onSubmit={handleSubmit}>
-                    <TextField
-                        margin="normal"
+                    <OutlinedInput
                         required
                         fullWidth
                         id="email"
-                        label="Email Address"
                         name="email"
                         autoComplete="email"
                         autoFocus
+                        placeholder="Email"
+                        sx={{ mt: 2, mb: 2 }}
                     />
-                    <TextField
-                        margin="normal"
+                    <OutlinedInput
                         required
                         fullWidth
                         name="password"
-                        label="Password"
                         type="password"
                         id="password"
                         autoComplete="current-password"
+                        placeholder="Password"
+                        sx={{ mt: 2, mb: 2 }}
                     />
                     <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
                     <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>

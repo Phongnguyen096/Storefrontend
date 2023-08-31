@@ -1,20 +1,34 @@
-import { useState } from 'react';
-import { Button, Popover } from '@mui/material';
+import { useEffect, useRef, useState } from 'react';
+import classNames from 'classnames/bind';
+import { Button } from '@mui/material';
 import { KeyboardArrowDown } from '@mui/icons-material';
+
+import styles from './DropdownMenu.module.scss';
 import { CustomComponentMUI } from '../CustomMetarialUI';
-import { themeButton, PopoverTheme } from '../CustomMetarialUI/ThemeStyle';
+import { themeButton } from '../CustomMetarialUI/ThemeStyle';
+
+const cx = classNames.bind(styles);
 
 function DropDownMenu({ nameBtn, children }) {
-    const [anchorEl, setAnchorEl] = useState(null);
-    const openMenu = Boolean(anchorEl);
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
+    const [open, setOpen] = useState(false);
+    let menuRef = useRef();
+    const handleClick = () => {
+        setOpen(!open);
     };
-    const handleCloseMenu = () => {
-        setAnchorEl(null);
-    };
+    useEffect(() => {
+        let handlerClickOutSide = (e) => {
+            if (!menuRef.current.contains(e.target)) {
+                setOpen(false);
+            }
+        };
+        document.addEventListener('mousedown', handlerClickOutSide);
+
+        return () => {
+            document.removeEventListener('mousedown', handlerClickOutSide);
+        };
+    });
     return (
-        <>
+        <div className={cx('wrapper')} ref={menuRef}>
             <CustomComponentMUI
                 comp={Button}
                 themeCustom={themeButton}
@@ -22,29 +36,11 @@ function DropDownMenu({ nameBtn, children }) {
                 variant="normal"
                 endIcon={<KeyboardArrowDown />}
                 onClick={handleClick}
-                aria-controls={openMenu ? 'PopoperId' : undefined}
-                aria-haspopup="true"
-                aria-expanded={openMenu ? 'true' : undefined}
-                disableElevation
             >
                 {nameBtn}
             </CustomComponentMUI>
-            <CustomComponentMUI
-                comp={Popover}
-                themeCustom={PopoverTheme}
-                id="PopoperId"
-                open={openMenu}
-                anchorEl={anchorEl}
-                onClose={handleCloseMenu}
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left',
-                }}
-                anchorPosition={{ left: 0, top: 160 }}
-            >
-                {children}
-            </CustomComponentMUI>
-        </>
+            <div className={open ? cx('drop-menu', 'active') : cx('drop-menu', 'inactive')}>{children}</div>
+        </div>
     );
 }
 

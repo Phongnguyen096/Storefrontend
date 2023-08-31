@@ -1,36 +1,45 @@
 .wrapper {
     display: block;
     width: 100%;
-    background-color: #238fe2;
+    background: rgb(82,72,183);
+    background: linear-gradient(90deg, rgba(82,72,183,1) 8%, rgba(52,109,216,1) 50%, rgba(0,181,255,1) 79%);
 }
 .nav-element {
    
     display: inline-flex;
     width: 100%;
     align-items: center;
-    height: 4rem;
-    padding: 0 16vw ;
+    height: 5rem;
+    position: relative;
 }
 .logo-content {
     display: inline-flex;
     padding-right: 5vw ;
     padding-left: 1vw;
+    position: absolute;
+    left: 16vw;
+    .logo {
+        cursor: pointer;
+        min-width: 170px;
+    }
+    .slogan {
+        padding: 0 15px;
+        margin-right: 5px;
+        min-width : 120px ;
+    }
 }
-.logo {
-    padding: 0, 15px;
-    cursor: pointer;
-}
-.slogan {
-    padding: 0 15px;
-    margin-right: 5px;
-    min-width : 120px ;
-}
+
 
 .search-bar {
     display: inline;
     padding-right: 5vw ;
+    position: absolute;
+    left: 40%;
+    width: 35% ;
 }
 .btn-login {
+    position: absolute;
+    right: 16vw;
 }
 
 .header-bar {

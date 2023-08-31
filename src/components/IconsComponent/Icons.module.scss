@@ -1,0 +1,9 @@
+#rectangle_1:hover{
+    stroke:  #aa1f23;
+}
+#rectangle_2:hover{
+    stroke: #aa1f23;
+}
+#rectangle_1:hover ~ #icon-svg{
+    fill:  #aa1f23;
+}

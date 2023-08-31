@@ -59,15 +59,15 @@ const LogoTypography = createTheme({
 
 const PrimaryTypography = createTheme({
     typography: {
-        fontFamily: ['Ysabeau Office', 'sans-serif'].join(','),
+        fontFamily: ['PT Sans', 'sans-serif'].join(','),
         typeSmall: {
-            fontSize: '1rem',
+            fontSize: '1.2rem',
         },
         typeMedium: {
-            fontSize: '1.4rem',
+            fontSize: '1.6rem',
         },
         typeLarge: {
-            fontSize: '3rem',
+            fontSize: '2.4rem',
         },
         typeTitle: {
             fontSize: '3rem',

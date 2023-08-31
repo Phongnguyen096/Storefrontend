@@ -26,7 +26,7 @@ function FieldGroupBackground({ textContent, textDescription }) {
                         comp={Typography}
                         themeCustom={PrimaryTypography}
                         color="primary"
-                        variant="typeMedium"
+                        variant="typeSmall"
                     >
                         {textDescription}
                     </CustomComponentMUI>

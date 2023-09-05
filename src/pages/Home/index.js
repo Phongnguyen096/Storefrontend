@@ -12,10 +12,19 @@ import ProductCard from '~/components/ProductCard';
 import productService from '~/services/productService';
 import { themeButton } from '~/components/CustomMetarialUI/ThemeStyle';
 import Footer from '~/layout/Footer';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { ProductSlice } from '~/features/product/ProductSlice';
 
 const cx = classNames.bind(styles);
 function Home() {
+    //redux
+    const dispatch = useDispatch();
+    // router
+    const navigate = useNavigate();
+    // state ->top product
     const [topProduct, setTopProduct] = useState([]);
+    //load data from sever
     useEffect(() => {
         return async () => {
             let responseProduct = await productService.getProduct('TOP');
@@ -24,6 +33,10 @@ function Home() {
             }
         };
     }, []);
+    /* const handleClickViewDetail = (data) => {
+        dispatch(ProductSlice.actions.loadProduct(data));
+        navigate(`products/${data.typeID}/${data.description}/${data.id}`);
+    }; */
     return (
         <div className={cx('wrapper')}>
             <Header />
@@ -50,6 +63,10 @@ function Home() {
                                         themeCustom={themeButton}
                                         variant="outline2"
                                         endIcon={<ArrowForwardIosOutlined />}
+                                        onClick={() => {
+                                            dispatch(ProductSlice.actions.loadProduct(item));
+                                            navigate(`products/${item.typeID}/${item.description}/${item.id}`);
+                                        }}
                                     >
                                         View Detail
                                     </CustomComponentMUI>

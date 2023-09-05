@@ -24,10 +24,10 @@ export const FOOTER_LIST_SERVICE = [
     {
         title: 'SHOP',
         content: [
-            { link: '/guitar/acoustic', name: 'Acoustic Guitars' },
-            { link: '/guitar/electric', name: 'Electric Guitars' },
-            { link: '/guitar/classic', name: 'Classic Guitars' },
-            { link: '/other', name: 'Other Products' },
+            { link: '/products/acoustic', name: 'Acoustic Guitars' },
+            { link: '/products/electric', name: 'Electric Guitars' },
+            { link: '/products/classic', name: 'Classic Guitars' },
+            { link: 'products/other', name: 'Other Products' },
         ],
     },
     {

@@ -11,7 +11,7 @@ function ProductCard({ name, price, imgUrl }) {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('image')}>
-                <img src={imgUrl} alt="productImage" />
+                <img src={require(`../../${imgUrl}`)} alt="productImage" />
             </div>
             <div className={cx('name')}>{name}</div>
             <div className={cx('price')}>{price}$</div>

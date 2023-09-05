@@ -3,17 +3,17 @@ import classNames from 'classnames/bind';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './Header.module.scss';
 import { PersonOutlineRounded, Logout } from '@mui/icons-material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { themeButton, LogoTypography, PrimaryTypography } from '~/components/CustomMetarialUI/ThemeStyle';
 import { CustomComponentMUI } from '~/components/CustomMetarialUI';
 import SearchBar from '../../components/SearchBar';
 import { userSlice } from '~/features/user/UserSlice';
 import ModalLoginForm from '~/components/LoginForm/ModalLoginForm';
-import { HeaderBar } from '~/config/Constants.config';
 import DropDownMenu from '~/components/DropdownMenu';
-import { HEADER_TEXT } from '~/config/Constant';
+import { HEADER_TEXT, HEADER_BAR_CONTENT } from '~/config/Constant';
 import ListMenu from '~/components/ListMenu';
+import productService from '~/services/productService';
 
 const cx = classNames.bind(styles);
 function Header() {
@@ -30,7 +30,22 @@ function Header() {
         dispatch(userSlice.actions.userLogout());
     };
 
-    //State open menu from header bar
+    // set content for each lists menu of header bar
+    const [headerBarContent, setHeaderBarContent] = useState(HEADER_BAR_CONTENT);
+    useEffect(() => {
+        let ContentHB = HEADER_BAR_CONTENT;
+        ContentHB.forEach((item) => {
+            if (item.listMenu && item.type === 'Product') {
+                item.listMenu.forEach(async (e) => {
+                    let textQuery = `${item.nameList.toUpperCase()}/${e.title.toUpperCase()}/TOP`;
+                    let list = (await productService.getProduct(textQuery)).data.product;
+                    //console.log(list);
+                    e.content = list;
+                });
+            }
+        });
+        setHeaderBarContent(ContentHB);
+    }, [headerBarContent]);
 
     return (
         <div className={cx('wrapper')}>
@@ -90,17 +105,19 @@ function Header() {
                 <ModalLoginForm open={open} handleClose={handleClose} />
             </div>
             <div className={cx('header-bar')}>
-                {HeaderBar.map((item) => (
-                    <div key={item.index} className={cx('button-header-bar')}>
-                        <DropDownMenu nameBtn={item.name}>
-                            {item.listMenu
-                                ? item.listMenu.map((e, index) => (
-                                      <ListMenu key={index} title={e.title} content={e.content} />
-                                  ))
-                                : ''}
-                        </DropDownMenu>
-                    </div>
-                ))}
+                {headerBarContent.map((item) => {
+                    return (
+                        <div key={item.index} className={cx('button-header-bar')}>
+                            <DropDownMenu nameBtn={item.nameList}>
+                                {item.listMenu
+                                    ? item.listMenu.map((e, index) => {
+                                          return <ListMenu key={index} title={e.title} content={e.content} product />;
+                                      })
+                                    : HEADER_TEXT.EMPTY}
+                            </DropDownMenu>
+                        </div>
+                    );
+                })}
             </div>
         </div>
     );

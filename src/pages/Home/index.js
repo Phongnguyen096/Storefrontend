@@ -33,10 +33,6 @@ function Home() {
             }
         };
     }, []);
-    /* const handleClickViewDetail = (data) => {
-        dispatch(ProductSlice.actions.loadProduct(data));
-        navigate(`products/${data.typeID}/${data.description}/${data.id}`);
-    }; */
     return (
         <div className={cx('wrapper')}>
             <Header />

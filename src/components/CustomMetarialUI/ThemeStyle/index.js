@@ -11,6 +11,9 @@ const themeButton = createTheme({
         red: {
             main: '#aa1f23',
         },
+        black: {
+            main: 'rgba(0,0,0,1)',
+        },
     },
     components: {
         MuiButton: {
@@ -20,6 +23,27 @@ const themeButton = createTheme({
                     style: {
                         textTransform: 'none',
                         height: '100%',
+                        width: '100%',
+                        fontSize: '1rem',
+                    },
+                },
+                {
+                    props: { variant: 'menuButton' },
+                    style: {
+                        textTransform: 'none',
+                        padding: '0.25rem 0',
+                        height: '100%',
+                        width: '100%',
+                        fontSize: '1rem',
+                        fontFamily: 'PT Sans',
+                        justifyContent: 'flex-start',
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+
+                        '&:hover': {
+                            backgroundColor: 'transparent',
+                            color: '#aa1f23',
+                        },
                     },
                 },
                 {

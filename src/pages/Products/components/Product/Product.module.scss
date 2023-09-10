@@ -1,0 +1,119 @@
+.wrapper{
+    padding: 0 16vw;
+}
+.name-product{
+    font-size: 2.5rem;
+    font-weight: 600;
+    font-family: 'PT Sans' , 'sans-serif';
+}
+.descriptions{
+    font-size: 0.75rem;
+    padding: 0.5rem 0;
+    font-family: 'Ysabeau Office', sans-serif;
+    font-weight: 600;
+    .divider{
+        border-right: 1px solid;
+        padding: 0 2px;
+    }
+}
+
+.series{
+    display: inline-flex;
+    font-family: 'Concert One';
+    font-size: 0.75rem;
+    span{
+        color: #a29d9e;
+    }
+    }
+    .series-number{
+        color:#aa1f23;
+        font-weight: 600;
+         padding: 0 4px;
+    }
+//product area
+.product-area{
+    display: flex;
+    padding: 1rem 0;
+}
+//left
+.left-area{
+    flex: 3;
+}
+
+.image-gallery{
+    width: 100% ;
+    height: 60vh;
+    display: none;
+    vertical-align: middle;
+   
+}
+.thumbs{
+    padding: 2rem 0;
+    border-top : 2px solid #D7B98A;
+    img{
+        vertical-align: middle;
+        object-fit: cover;
+    }
+}
+.image-thumbs{
+    width: 16%;
+    height: 7rem ;
+    margin-right: 1.5rem;
+    border: 1px solid #D7B98A;
+}
+
+.active {
+    display:block;
+}
+.focus{
+    border:3px solid #aa1f23;
+}
+
+// right
+.right-area{
+    flex: 2;
+    padding-left: 3rem;
+}
+.price{
+    display: inline-flex;
+    .currency-icon{
+        font-size: 2rem;
+        padding-top: 16px;
+        padding-right: 4px;
+        font-family: 'PT Sans';
+    }
+    .number{
+        font-size: 4rem;
+        font-family: 'Ysabeau Office',sans-serif;
+        font-weight: 500;
+    }
+    .currency{
+        padding-left: 2px;
+        padding-top: 3rem;
+        font-family: "Ysabeau Office", sans-serif;
+        font-weight: 600;
+    }
+}
+
+.currency-choose{
+    padding: 4px 2rem;
+    .choose {
+        color: #aa1f23;
+    }
+    span{
+        padding-right: 0.5rem ;
+        cursor: pointer;
+        font-family: "Ysabeau Office", sans-serif;
+        font-weight: 600;
+        color: #a29d9e;
+    }
+}
+
+//shipping promotion
+.shipping-promotion{
+    font-size: 0.7rem;
+    font-family: 'PT Sans';
+    font-weight: 600;
+    padding: 3rem 2rem 1rem 1rem;
+    border-bottom: 1px solid #D7B98A;
+}

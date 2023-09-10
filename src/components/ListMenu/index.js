@@ -1,12 +1,21 @@
 import classNames from 'classnames/bind';
-import { Typography } from '@mui/material';
+import { Typography, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import styles from './ListMenu.module.scss';
 import { CustomComponentMUI } from '~/components/CustomMetarialUI';
 import { PrimaryTypography } from '~/components/CustomMetarialUI/ThemeStyle';
+import { themeButton } from '~/components/CustomMetarialUI/ThemeStyle';
+import { ProductSlice } from '~/features/product/ProductSlice';
 
 const cx = classNames.bind(styles);
 function ListMenu({ title, content, colorWhite, product }) {
+    //dispatch redux
+    const dispatch = useDispatch();
+    //navigation
+    const navigate = useNavigate();
+
     return (
         <div className={cx('wrapper')}>
             <div className={colorWhite ? cx('title-menu', 'white-color') : cx('title-menu', 'default-color')}>
@@ -20,16 +29,23 @@ function ListMenu({ title, content, colorWhite, product }) {
                         content.map((item, index) => {
                             return (
                                 <li key={index}>
-                                    <a
-                                        href={
-                                            product
-                                                ? `products/${item.typeID}/${item.description}/${item.id}`
-                                                : item.link
-                                        }
-                                        className={colorWhite ? cx('white-color') : cx('default-color')}
-                                    >
-                                        {item.name}
-                                    </a>
+                                    <div className={colorWhite ? cx('white-color') : cx('default-color')}>
+                                        <CustomComponentMUI
+                                            comp={Button}
+                                            themeCustom={themeButton}
+                                            variant="menuButton"
+                                            onClick={() => {
+                                                dispatch(ProductSlice.actions.loadProduct(item));
+                                                if (product) {
+                                                    navigate(`products/${item.typeID}/${item.description}/${item.id}`);
+                                                } else {
+                                                    navigate(item.link);
+                                                }
+                                            }}
+                                        >
+                                            {item.name}
+                                        </CustomComponentMUI>
+                                    </div>
                                 </li>
                             );
                         })

@@ -2,7 +2,7 @@ import { Button, Link, Typography, IconButton } from '@mui/material';
 import classNames from 'classnames/bind';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './Header.module.scss';
-import { PersonOutlineRounded, Logout } from '@mui/icons-material';
+import { PersonOutlineRounded, Logout, KeyboardArrowDown } from '@mui/icons-material';
 import React, { useEffect, useState } from 'react';
 
 import { themeButton, LogoTypography, PrimaryTypography } from '~/components/CustomMetarialUI/ThemeStyle';
@@ -108,7 +108,7 @@ function Header() {
                 {headerBarContent.map((item) => {
                     return (
                         <div key={item.index} className={cx('button-header-bar')}>
-                            <DropDownMenu nameBtn={item.nameList}>
+                            <DropDownMenu nameBtn={item.nameList} icon={<KeyboardArrowDown />}>
                                 {item.listMenu
                                     ? item.listMenu.map((e, index) => {
                                           return <ListMenu key={index} title={e.title} content={e.content} product />;

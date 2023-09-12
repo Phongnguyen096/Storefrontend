@@ -2,12 +2,15 @@ import classNames from 'classnames/bind';
 import { Typography, Box, Button } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
+import { Add } from '@mui/icons-material';
 
 import styles from './Admin.module.scss';
 import { PrimaryTypography } from '~/components/CustomMetarialUI/ThemeStyle';
 import { CustomComponentMUI } from '~/components/CustomMetarialUI';
 import productService from '~/services/productService';
 import userService from '~/services/userService';
+import DropDownMenu from '~/components/DropdownMenu';
+import CreateUserForm from './components/CreateUserForm.js';
 const cx = classNames.bind(styles);
 
 function AdminPage() {
@@ -50,7 +53,7 @@ function AdminPage() {
                 setProducts(productData);
             }
         };
-    }, []);
+    }, [users, products]);
     //set table user
     const userColumns = [
         { field: 'id', headerName: 'ID', width: 90 },
@@ -187,8 +190,15 @@ function AdminPage() {
                             },
                         }}
                         pageSizeOptions={[5]}
+                        checkboxSelection
+                        disableRowSelectionOnClick
                     />
                 </Box>
+                <div className={cx('create-user')}>
+                    <DropDownMenu nameBtn="Create User" icon={<Add />}>
+                        <CreateUserForm />
+                    </DropDownMenu>
+                </div>
             </div>
             <div className={cx('product-manager')}>
                 <CustomComponentMUI comp={Typography} themeCustom={PrimaryTypography} variant="typeMedium">
@@ -206,6 +216,8 @@ function AdminPage() {
                             },
                         }}
                         pageSizeOptions={[5]}
+                        checkboxSelection
+                        disableRowSelectionOnClick
                     />
                 </Box>
             </div>

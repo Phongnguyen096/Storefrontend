@@ -8,6 +8,7 @@ import { CustomComponentMUI } from '~/components/CustomMetarialUI';
 import { PrimaryTypography } from '~/components/CustomMetarialUI/ThemeStyle';
 import { themeButton } from '~/components/CustomMetarialUI/ThemeStyle';
 import { ProductSlice } from '~/features/product/ProductSlice';
+import { AppSlice } from '~/features/system/AppSlice';
 
 const cx = classNames.bind(styles);
 function ListMenu({ title, content, colorWhite, product }) {
@@ -36,8 +37,9 @@ function ListMenu({ title, content, colorWhite, product }) {
                                             variant="menuButton"
                                             onClick={() => {
                                                 dispatch(ProductSlice.actions.loadProduct(item));
+                                                dispatch(AppSlice.actions.setHandleMenu(false));
                                                 if (product) {
-                                                    navigate(`products/${item.typeID}/${item.description}/${item.id}`);
+                                                    navigate(`/products/${item.typeID}/${item.description}/${item.id}`);
                                                 } else {
                                                     navigate(item.link);
                                                 }

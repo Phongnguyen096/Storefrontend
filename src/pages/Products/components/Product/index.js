@@ -8,6 +8,7 @@ import styles from './Product.module.scss';
 import { dbFireStore } from '~/Firebase';
 import productService from '~/services/productService';
 import { ProductSlice } from '~/features/product/ProductSlice';
+import DefaultLayout from '~/layout/DefaultLayout';
 const cx = classNames.bind(styles);
 
 function Product() {
@@ -34,16 +35,12 @@ function Product() {
                 console.log('ID', ID);
                 const imageRef = collection(dbFireStore, 'productImage');
                 const q = query(imageRef, where('productID', '==', ID));
-                //const snap = await getDoc(q);
-                await onSnapshot(q, (snapshot) => {
+                onSnapshot(q, (snapshot) => {
                     snapshot.docs.forEach((doc) => {
-                        console.log();
                         let urls = doc.data().imageURL;
                         setImageURL(urls);
                     });
                 });
-                // Document was found in the cache. If no cached document exists,
-                // an error will be returned to the 'catch' block below.
             } catch (e) {
                 console.log('Error getting cached document:', e);
             }
@@ -53,82 +50,84 @@ function Product() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [productSelector.productData.id]);
     return (
-        <div className={cx('wrapper')}>
-            <div className={cx('name-product')}>{productSelector.productData.name}</div>
-            <div className={cx('descriptions')}>
-                {(productSelector.productData.typeID === 1 && 'ACOUSTIC') ||
-                    (productSelector.productData.typeID === 2 && 'CLASSIC') ||
-                    (productSelector.productData.typeID === 3 && 'ELECTRIC') ||
-                    (productSelector.productData.typeID === 4 && 'OTHER')}
-                <span className={cx('divider')} />
-                {Object.keys(productSelector.productData).length === 0
-                    ? ''
-                    : productSelector.productData.description.toUpperCase()}
-            </div>
-            <div className={cx('product-details')}>
-                <div className={cx('series')}>
-                    <span>Series: </span>
-                    <div
-                        className={cx('series-number')}
-                    >{`${productSelector.productData.typeID}${productSelector.productData.id}`}</div>
+        <DefaultLayout>
+            <div className={cx('wrapper')}>
+                <div className={cx('name-product')}>{productSelector.productData.name}</div>
+                <div className={cx('descriptions')}>
+                    {(productSelector.productData.typeID === 1 && 'ACOUSTIC') ||
+                        (productSelector.productData.typeID === 2 && 'CLASSIC') ||
+                        (productSelector.productData.typeID === 3 && 'ELECTRIC') ||
+                        (productSelector.productData.typeID === 4 && 'OTHER')}
+                    <span className={cx('divider')} />
+                    {Object.keys(productSelector.productData).length === 0
+                        ? ''
+                        : productSelector.productData.description.toUpperCase()}
                 </div>
-            </div>
-            <div className={cx('product-area')}>
-                <div className={cx('left-area', 'left')}>
-                    <div className={cx('photo-swipe-gallery')}>
-                        {imageURL.map((url, index) => (
-                            <img
-                                key={index}
-                                className={active === index ? cx('image-gallery', 'active') : cx('image-gallery')}
-                                src={url}
-                                alt="img-gallery"
-                            />
-                        ))}
-                    </div>
-                    <div className={cx('thumbs')}>
-                        {imageURL.map((url, index) => (
-                            <img
-                                key={index}
-                                className={active === index ? cx('image-thumbs', 'focus') : cx('image-thumbs')}
-                                src={url}
-                                alt="img-gallery"
-                                onClick={() => setActive(index)}
-                            />
-                        ))}
+                <div className={cx('product-details')}>
+                    <div className={cx('series')}>
+                        <span>Series: </span>
+                        <div
+                            className={cx('series-number')}
+                        >{`${productSelector.productData.typeID}${productSelector.productData.id}`}</div>
                     </div>
                 </div>
-                <div className={cx('right-area', 'right')}>
-                    <div className={cx('shopping')}>
-                        <div className={cx('price-container')}>
-                            <div className={cx('price')}>
-                                <span className={cx('currency-icon')}>$</span>
-                                <span className={cx('number')}>
-                                    {Currency === 'USD'
-                                        ? productSelector.productData.price
-                                        : productSelector.productData.price * 24000}
-                                </span>
-                                <span className={cx('currency')}>{Currency}</span>
-                            </div>
-                            <div className={cx('currency-choose')}>
-                                <span
-                                    className={Currency === 'USD' ? cx('choose') : cx('element-choose')}
-                                    onClick={() => setCurrency('USD')}
-                                >
-                                    USD
-                                </span>
-                                <span
-                                    className={Currency === 'VND' ? cx('choose') : cx('element-choose')}
-                                    onClick={() => setCurrency('VND')}
-                                >
-                                    VND
-                                </span>
-                            </div>
+                <div className={cx('product-area')}>
+                    <div className={cx('left-area', 'left')}>
+                        <div className={cx('photo-swipe-gallery')}>
+                            {imageURL.map((url, index) => (
+                                <img
+                                    key={index}
+                                    className={active === index ? cx('image-gallery', 'active') : cx('image-gallery')}
+                                    src={url}
+                                    alt="img-gallery"
+                                />
+                            ))}
                         </div>
-                        <div className={cx('shipping-promotion')}>Free 2-Day Shipping</div>
+                        <div className={cx('thumbs')}>
+                            {imageURL.map((url, index) => (
+                                <img
+                                    key={index}
+                                    className={active === index ? cx('image-thumbs', 'focus') : cx('image-thumbs')}
+                                    src={url}
+                                    alt="img-gallery"
+                                    onClick={() => setActive(index)}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                    <div className={cx('right-area', 'right')}>
+                        <div className={cx('shopping')}>
+                            <div className={cx('price-container')}>
+                                <div className={cx('price')}>
+                                    <span className={cx('currency-icon')}>$</span>
+                                    <span className={cx('number')}>
+                                        {Currency === 'USD'
+                                            ? productSelector.productData.price
+                                            : productSelector.productData.price * 24000}
+                                    </span>
+                                    <span className={cx('currency')}>{Currency}</span>
+                                </div>
+                                <div className={cx('currency-choose')}>
+                                    <span
+                                        className={Currency === 'USD' ? cx('choose') : cx('element-choose')}
+                                        onClick={() => setCurrency('USD')}
+                                    >
+                                        USD
+                                    </span>
+                                    <span
+                                        className={Currency === 'VND' ? cx('choose') : cx('element-choose')}
+                                        onClick={() => setCurrency('VND')}
+                                    >
+                                        VND
+                                    </span>
+                                </div>
+                            </div>
+                            <div className={cx('shipping-promotion')}>Free 2-Day Shipping</div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </DefaultLayout>
     );
 }
 

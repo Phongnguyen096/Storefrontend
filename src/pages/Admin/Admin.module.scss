@@ -1,8 +1,23 @@
 .header{
     height: 4rem;
     background-color:#238fe2;
+    position:fixed;
+    width: 100% ;
+    z-index: 2;
 }
 
 .user-manager , .product-manager{
     padding-top : 4rem ;
 }
+
+.create-user{
+    width: fit-content;
+    border: 1px solid;
+    border-radius: 3px;
+    margin: 1rem 3px;
+    
+}
+
+
+
+

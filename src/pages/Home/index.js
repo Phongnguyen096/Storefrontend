@@ -51,7 +51,7 @@ function Home() {
                         {topProduct.map((item, index) => {
                             return (
                                 <div key={index} className={cx('top-product-item')}>
-                                    <ProductCard name={item.name} price={item.price} imgUrl={item.imgUrl} />
+                                    <ProductCard name={item.name} price={item.price} serial={item.serial} />
                                     <div className={cx('btn-view-detail')}>
                                         <CustomComponentMUI
                                             comp={Button}

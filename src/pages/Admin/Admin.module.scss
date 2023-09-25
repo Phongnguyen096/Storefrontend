@@ -7,7 +7,19 @@
 }
 
 .user-manager , .product-manager{
-    padding-top : 4rem ;
+    padding : 4rem 1rem;
+}
+.user-label{
+    padding: 1rem 0;
+    font-weight: 600;
+    font-family: 'PT sans','sans-serif';
+}
+.selection-user{
+    padding: 1rem 0;
+    display: inline-flex;
+    .select-btn{
+        padding-right: 1rem;
+    }
 }
 
 .create-user{
@@ -17,7 +29,15 @@
     margin: 1rem 3px;
     
 }
-
+.delete-bnt-select:hover{
+    color  : rgb(164, 29, 29)
+}
+.active{
+    display: block;
+}
+.inactive{
+    display: none;
+}
 
 
 

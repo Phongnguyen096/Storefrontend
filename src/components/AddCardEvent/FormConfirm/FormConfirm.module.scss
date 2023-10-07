@@ -1,0 +1,79 @@
+.wrapper{
+    background: #ffff;
+    min-height: 100px;
+    border-bottom: 2px solid;
+    padding-top: 1rem ;
+    margin: 16vw 20vw ;
+    min-width: 400px;
+}
+
+.header-form{
+    position: relative;
+    margin: 0 2rem;
+    border-bottom: 1px solid;
+    padding: 0.5rem 0;
+}
+.notification{
+    display: flex; 
+    .done-icon{
+        padding-right: 1rem ;
+    }
+    .text-notification{
+        font-size: 1.2rem;
+        font-family: 'PT Sans', 'sans-serif';
+        font-weight: 800;
+    }
+    
+}
+.close-btn{
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.product-description{
+    display: flex;
+}
+.image-product{
+    padding: 0.5rem 1rem; 
+    width: 40% ;
+    .name-product{
+        width: fit-content;
+        padding: 0 1rem;
+        font-size: 1.5rem;
+        font-weight: 600;
+        font-family: 'Ysabeau Office','sans-serif';
+    }
+    img {
+        max-width: 500px;
+        width: 90% ;
+        margin: 0 2rem;
+
+    }
+}
+.confirm-shopping{
+    padding-top: 1rem;
+    padding-bottom: 3rem;
+    position: relative;
+    width: 60%;
+    .amount-product-cart{
+        text-align: end;
+    padding-right: 2rem;
+    font-size: 1.2rem;
+    font-family: 'PT Sans','sans-serif';
+    color: #aa1f23;
+    font-weight: 600;
+    }
+    .view-cart-btn{
+        position: absolute;
+        bottom: 2rem;
+        right: 2rem;
+    }
+    .price{
+        position: absolute;
+        bottom: 2rem;
+        left: 1rem;
+        font-size: 2rem;
+        font-family: 'PT Sans','sans-serif';
+    }
+}

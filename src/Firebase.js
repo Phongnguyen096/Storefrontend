@@ -23,7 +23,7 @@ const storage = getStorage();
 export const avatarProductRef = (fileName) => ref(storage, 'avatarProductImage/' + fileName);
 export const listImageProductRef = (fileName) => ref(storage, 'productImage/' + fileName);
 export const UploadTask = (storageRef, file) => uploadBytesResumable(storageRef, file);
-export const UploadAndSetFireStoreDB = (uploadTask, data) => {
+export const UploadAndSetFireStoreDB = (uploadTask, data, refCollection) => {
     uploadTask.on(
         'state_changed',
         (snapshot) => {
@@ -65,11 +65,17 @@ export const UploadAndSetFireStoreDB = (uploadTask, data) => {
         () => {
             // Upload completed successfully, now we can get the download URL
             getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-                // error ref
-                await addDoc(collection(dbFireStore, 'productAvatar'), {
-                    ...data,
-                    imageURL: downloadURL,
-                });
+                if (refCollection === 'productAvatar') {
+                    await addDoc(collection(dbFireStore, refCollection), {
+                        ...data,
+                        imageURL: downloadURL,
+                    });
+                } else if (refCollection === 'productImage') {
+                    await addDoc(collection(dbFireStore, refCollection), {
+                        ...data,
+                        imageURL: downloadURL,
+                    });
+                }
             });
             console.log('Upload complete');
         },

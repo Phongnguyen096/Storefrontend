@@ -1,25 +1,27 @@
-import { Button, Link, Typography, IconButton } from '@mui/material';
+import { Button, Link, Typography, IconButton, Badge } from '@mui/material';
 import classNames from 'classnames/bind';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './Header.module.scss';
-import { PersonOutlineRounded, Logout, KeyboardArrowDown } from '@mui/icons-material';
+import { PersonOutlineRounded, Logout, KeyboardArrowDown, ShoppingCart } from '@mui/icons-material';
 import React, { useEffect, useState } from 'react';
 
 import { themeButton, LogoTypography, PrimaryTypography } from '~/components/CustomMetarialUI/ThemeStyle';
 import { CustomComponentMUI } from '~/components/CustomMetarialUI';
 import SearchBar from '../../components/SearchBar';
 import { userSlice } from '~/features/user/UserSlice';
-import ModalLoginForm from '~/components/LoginForm/ModalLoginForm';
 import DropDownMenu from '~/components/DropdownMenu';
 import { HEADER_TEXT, HEADER_BAR_CONTENT } from '~/config/Constant';
 import ListMenu from '~/components/ListMenu';
 import productService from '~/services/productService';
+import ModalHandleEvent from '~/components/ModaHandleEvent';
+import LoginForm from '~/components/LoginForm';
 
 const cx = classNames.bind(styles);
 function Header() {
     const dispatch = useDispatch();
+    // selector redux
     const userSelector = useSelector((state) => state.user);
-
+    const appSelector = useSelector((state) => state.app);
     //State open login form from button account
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -102,7 +104,17 @@ function Header() {
                     </div>
                 )}
 
-                <ModalLoginForm open={open} handleClose={handleClose} />
+                <ModalHandleEvent open={open} handleClose={handleClose}>
+                    <LoginForm handleClose={handleClose} />
+                </ModalHandleEvent>
+
+                <div className={cx('cart-bnt')}>
+                    <IconButton>
+                        <Badge badgeContent={appSelector.amountProductCart} color="secondary">
+                            <ShoppingCart />
+                        </Badge>
+                    </IconButton>
+                </div>
             </div>
             <div className={cx('header-bar')}>
                 {headerBarContent.map((item) => {

@@ -40,13 +40,17 @@ function CreateProductForm() {
         //upload img avatar -> firebase storage
         const uploadAvatar = avatarProductRef(`${reqData.description}/${reqData.imgUrl.name}`);
         const uploadTask = UploadTask(uploadAvatar, reqData.imgUrl);
-        UploadAndSetFireStoreDB(uploadTask, { name: reqData.name, serial: reqData.serial });
+        UploadAndSetFireStoreDB(uploadTask, { name: reqData.name, serial: reqData.serial }, 'productAvatar');
 
         //upload img list -> firebase  storage
         reqData.listImage.forEach((img) => {
             let imgStorageRef = listImageProductRef(`${reqData.description}/${img.name}`);
             let uploadTaskListImage = UploadTask(imgStorageRef, img);
-            UploadAndSetFireStoreDB(uploadTaskListImage, { name: reqData.name, serial: reqData.serial });
+            UploadAndSetFireStoreDB(
+                uploadTaskListImage,
+                { name: reqData.name, serial: reqData.serial },
+                'productImage',
+            );
         });
     };
     return (

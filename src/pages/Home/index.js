@@ -44,14 +44,14 @@ function Home() {
                 <div className={cx('product-pick-model')}>
                     <div className={cx('title-pick-model')}>
                         <CustomComponentMUI comp={Typography} themeCustom={PrimaryTypography} variant="typeTitle">
-                            Product Pick Models
+                            Product
                         </CustomComponentMUI>
                     </div>
                     <div className={cx('top-product')}>
                         {topProduct.map((item, index) => {
                             return (
                                 <div key={index} className={cx('top-product-item')}>
-                                    <ProductCard name={item.name} price={item.price} serial={item.serial} />
+                                    <ProductCard data={item} />
                                     <div className={cx('btn-view-detail')}>
                                         <CustomComponentMUI
                                             comp={Button}

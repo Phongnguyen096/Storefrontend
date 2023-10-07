@@ -31,14 +31,16 @@ function Product() {
                     let productData = (await productService.getProduct(params.id)).data.product;
                     dispatch(ProductSlice.actions.loadProduct(productData));
                 }
-                let ID = productSelector.productData.id;
-                console.log('ID', ID);
+                let serialProduct = productSelector.productData.serial;
                 const imageRef = collection(dbFireStore, 'productImage');
-                const q = query(imageRef, where('productID', '==', ID));
+                const q = query(imageRef, where('serial', '==', serialProduct));
+
                 onSnapshot(q, (snapshot) => {
+                    let listImage = [];
                     snapshot.docs.forEach((doc) => {
-                        let urls = doc.data().imageURL;
-                        setImageURL(urls);
+                        let url = doc.data().imageURL;
+                        listImage.push(url);
+                        setImageURL(listImage);
                     });
                 });
             } catch (e) {

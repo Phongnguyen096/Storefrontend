@@ -5,6 +5,8 @@ export const ProductSlice = createSlice({
     initialState: {
         productData: {},
         listProduct: [],
+        totalPrice: 0,
+        listProductCart: [],
     },
     reducers: {
         loadProduct: (state, action) => {
@@ -16,6 +18,18 @@ export const ProductSlice = createSlice({
         productReset: (state, action) => {
             state.productData = {};
             state.listProduct = [];
+        },
+        totalPrice: (state, action) => {
+            state.totalPrice = action.payload;
+        },
+        increaseTotalPrice: (state, action) => {
+            state.totalPrice += action.payload;
+        },
+        decreaseTotalPrice: (state, action) => {
+            state.totalPrice -= action.payload;
+        },
+        addListProductCart: (state, action) => {
+            state.listProductCart = [...state.listProductCart, action.payload];
         },
     },
 });

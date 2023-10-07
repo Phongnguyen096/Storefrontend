@@ -17,11 +17,16 @@ const handleCreateNewUser = async (data) => {
 const handleDeleteUser = async (userId) => {
     return await axios.delete('user/delete-user', { data: { id: userId } });
 };
+
+const handleUpdateUser = async (userData) => {
+    return await axios.put('user/edit-user', userData);
+};
 const userService = {
     handleLoginApi: handleLoginApi,
     handleGetUser: handleGetUser,
     handleCreateNewUser: handleCreateNewUser,
     handleDeleteUser: handleDeleteUser,
+    handleUpdateUser: handleUpdateUser,
 };
 
 export default userService;

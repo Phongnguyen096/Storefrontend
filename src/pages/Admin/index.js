@@ -114,23 +114,39 @@ function AdminPage() {
             editable: true,
         },
         {
-            field: 'image',
-            headerName: 'Image',
-            width: 150,
-            editable: true,
-        },
-        {
             field: 'edit',
             headerName: 'Edit',
             width: 180,
             renderCell: (cellValue) => {
                 return (
                     <>
-                        <Button variant="container">Update</Button>
                         <Button
                             variant="container"
                             onClick={() => {
-                                console.log('hello');
+                                let reqData = {};
+                                apiRef.current.getSelectedRows().forEach(async (e) => {
+                                    reqData.id = e.id;
+                                    reqData.firstName = e.firstName;
+                                    reqData.lastName = e.lastName;
+                                    reqData.email = e.email;
+                                    reqData.address = e.address;
+                                    reqData.gender = e.gender === 'Male' ? 1 : 0;
+                                    reqData.phoneNumber = e.phoneNumber;
+
+                                    let message = (await userService.handleUpdateUser(reqData)).data;
+                                    console.log(message);
+                                });
+                            }}
+                        >
+                            Update
+                        </Button>
+                        <Button
+                            variant="container"
+                            onClick={() => {
+                                apiRef.current.getSelectedRows().forEach(async (e) => {
+                                    let mess = await userService.handleDeleteUser(e.id).data;
+                                    console.log(mess);
+                                });
                             }}
                         >
                             Delete
@@ -183,7 +199,14 @@ function AdminPage() {
                 return (
                     <>
                         <Button variant="container">update</Button>
-                        <Button variant="container">Delete</Button>
+                        <Button
+                            variant="container"
+                            onClick={() => {
+                                // delete image product and image list
+                            }}
+                        >
+                            Delete
+                        </Button>
                     </>
                 );
             },
@@ -237,6 +260,7 @@ function AdminPage() {
                         pageSizeOptions={[5]}
                         checkboxSelection={checkboxSelection}
                         apiRef={apiRef}
+                        editMode="row"
                     />
                 </Box>
                 <div className={cx('create-user')}>
@@ -261,7 +285,6 @@ function AdminPage() {
                             },
                         }}
                         pageSizeOptions={[5]}
-                        checkboxSelection
                         disableRowSelectionOnClick
                     />
                 </Box>

@@ -15,10 +15,12 @@ import ListMenu from '~/components/ListMenu';
 import productService from '~/services/productService';
 import ModalHandleEvent from '~/components/ModaHandleEvent';
 import LoginForm from '~/components/LoginForm';
+import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 function Header() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     // selector redux
     const userSelector = useSelector((state) => state.user);
     const appSelector = useSelector((state) => state.app);
@@ -109,7 +111,11 @@ function Header() {
                 </ModalHandleEvent>
 
                 <div className={cx('cart-bnt')}>
-                    <IconButton>
+                    <IconButton
+                        onClick={() => {
+                            navigate('/cart');
+                        }}
+                    >
                         <Badge badgeContent={appSelector.amountProductCart} color="secondary">
                             <ShoppingCart />
                         </Badge>

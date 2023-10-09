@@ -31,6 +31,15 @@ export const ProductSlice = createSlice({
         addListProductCart: (state, action) => {
             state.listProductCart = [...state.listProductCart, action.payload];
         },
+        increaseAmountProductCart: (state, action) => {
+            state.listProductCart.every((e) => {
+                if (e.serial === action.payload) {
+                    e.amount += 1;
+                    return false;
+                }
+                return true;
+            });
+        },
     },
 });
 

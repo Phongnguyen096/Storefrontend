@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import { Button, Typography } from '@mui/material';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './AddCardButton.module.scss';
 import { CustomComponentMUI } from '~/components/CustomMetarialUI';
 import { themeButton, PrimaryTypography } from '../CustomMetarialUI/ThemeStyle';
@@ -12,11 +12,32 @@ import { ProductSlice } from '~/features/product/ProductSlice';
 const cx = classNames.bind(styles);
 function AddCardButton({ data }) {
     const dispatch = useDispatch();
+    const productSelector = useSelector((state) => state.product);
     const [openConfirmForm, setOpenConfirmForm] = useState(false);
     const handleOpen = () => {
         dispatch(AppSlice.actions.increaseAmountProduct(1));
         dispatch(ProductSlice.actions.increaseTotalPrice(data.price));
-        dispatch(ProductSlice.actions.addListProductCart({ name: data.name, price: data.price, serial: data.serial }));
+
+        // check add new product model in cart
+        let check = true;
+        productSelector.listProductCart.every((element) => {
+            if (element.serial === data.serial) {
+                dispatch(ProductSlice.actions.increaseAmountProductCart(data.serial));
+                check = false;
+                return false;
+            }
+            return true;
+        });
+        if (check) {
+            dispatch(
+                ProductSlice.actions.addListProductCart({
+                    name: data.name,
+                    price: data.price,
+                    serial: data.serial,
+                    amount: 1,
+                }),
+            );
+        }
         setOpenConfirmForm(true);
     };
     const handleClose = (e) => {

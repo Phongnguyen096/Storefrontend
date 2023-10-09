@@ -6,6 +6,7 @@ function ProductByType() {
     const params = useParams();
     const [listProduct, setListProduct] = useState([]);
     useEffect(() => {
+        document.title = params.type;
         let TYPE = params.type.toUpperCase();
         console.log(TYPE);
         const fetchData = async () => {

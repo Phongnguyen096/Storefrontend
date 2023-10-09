@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
-import { Typography, Button } from '@mui/material';
-import { ArrowForwardIosOutlined } from '@mui/icons-material';
+import { Typography, Button, IconButton } from '@mui/material';
+import { ArrowForwardIosOutlined, ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import { useState, useEffect } from 'react';
 
 import styles from './Home.module.scss';
@@ -23,6 +23,8 @@ function Home() {
     const navigate = useNavigate();
     // state ->top product
     const [topProduct, setTopProduct] = useState([]);
+    //
+    const [indexCheck, setIndexCheck] = useState(0);
     //load data from sever
     useEffect(() => {
         return async () => {
@@ -69,6 +71,44 @@ function Home() {
                                 </div>
                             );
                         })}
+                    </div>
+                </div>
+                <div className={cx('product-other')}>
+                    <div className={cx('title')}>Other Product</div>
+                    <div className={cx('product-sbs')}>
+                        <div className={cx('arrow-back')}>
+                            <IconButton
+                                onClick={() => {
+                                    setIndexCheck(indexCheck - 1);
+                                }}
+                            >
+                                <ArrowBackIos />
+                            </IconButton>
+                        </div>
+
+                        {topProduct.map((item, index) => {
+                            return (
+                                <div
+                                    key={index}
+                                    className={
+                                        index >= indexCheck && index - indexCheck < 3
+                                            ? cx('other-product-item', 'active')
+                                            : cx('other-product-item', 'inactive')
+                                    }
+                                >
+                                    <ProductCard data={item} typeOther />
+                                </div>
+                            );
+                        })}
+                        <div className={cx('arrow-forward')}>
+                            <IconButton
+                                onClick={() => {
+                                    setIndexCheck(indexCheck + 1);
+                                }}
+                            >
+                                <ArrowForwardIos />
+                            </IconButton>
+                        </div>
                     </div>
                 </div>
             </div>

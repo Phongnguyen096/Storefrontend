@@ -9,7 +9,7 @@ import AddCardButton from '~/components/AddCardEvent';
 
 const cx = classNames.bind(styles);
 
-function ProductCard({ data }) {
+function ProductCard({ data, typeOther }) {
     const [imgURL, setImgURL] = useState('');
     useEffect(() => {
         const FetchImageURL = async () => {
@@ -24,7 +24,7 @@ function ProductCard({ data }) {
     }, [data.serial]);
     return (
         <div className={cx('wrapper')}>
-            <div className={cx('image')}>
+            <div className={typeOther ? cx('image-other') : cx('image')}>
                 <img src={imgURL} alt="productImage" />
             </div>
             <div className={cx('name')}>{data.name}</div>

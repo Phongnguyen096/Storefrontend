@@ -10,6 +10,18 @@
         object-fit: contain;
     }
 }
+.image-other{
+    width: 100%;
+    text-align: center;
+    background-color: #ffff;
+    img{
+        border: 1px solid #e5e2d6;
+        height: 15rem;
+        padding: 2rem;
+        width: 100%;
+        object-fit: contain;
+     }
+}
 .name{
     width: 100%;
     text-align: center;

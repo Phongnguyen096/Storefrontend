@@ -10,7 +10,7 @@
         font-weight: 600;
     }
     .top-product{
-        padding: 4vh 16vw;
+        padding: 4vh 12vw;
         display: grid;
         grid-template-columns: auto auto auto auto;
 
@@ -24,4 +24,43 @@
         padding-bottom: 15px;
     }
 
+}
+
+.product-other{
+    background-color: #f6f5f1;
+    text-align: center;
+    .title{
+        padding-top: 2rem;
+        font-size: 2rem;
+    }
+    .product-sbs{
+        display: flex;
+        margin: 2rem 12vw;
+        padding: 2rem;
+        justify-content: center;
+        position: relative;
+        .other-product-item{
+            padding: 1rem 2rem;
+            width: 30%;
+        }
+        .arrow-back{
+            position: absolute;
+            bottom: 50% ;
+            left: 0;
+            width: 2rem;
+
+        }
+
+        .arrow-forward{
+            position: absolute;
+            right: 0;
+            bottom: 50% ;        }
+    } 
+}
+
+.active{
+    display: block;
+}
+.inactive{
+    display: none;
 }

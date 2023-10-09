@@ -1,6 +1,6 @@
 .wrapper{
     background: #ffff;
-    min-height: 100px;
+    min-height: 200px;
     border-bottom: 2px solid;
     padding-top: 1rem ;
     margin: 16vw 20vw ;
@@ -58,16 +58,33 @@
     width: 60%;
     .amount-product-cart{
         text-align: end;
-    padding-right: 2rem;
-    font-size: 1.2rem;
-    font-family: 'PT Sans','sans-serif';
-    color: #aa1f23;
-    font-weight: 600;
+        padding-right: 2rem;
+        font-size: 1.2rem;
+        font-family: 'PT Sans','sans-serif';
+        color: #aa1f23;
+        font-weight: 600;
     }
     .view-cart-btn{
         position: absolute;
         bottom: 2rem;
         right: 2rem;
+    }
+    .btn-continue{
+        text-align: end;
+        padding: 2rem;
+        button{
+            padding: 1rem;
+            background: #ffff;
+            border: 1px solid;
+            border-radius: 4px ;
+            font-family: 'Ysabeau Office';
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        button:hover{
+            color: #aa1f23;
+        }
     }
     .price{
         position: absolute;

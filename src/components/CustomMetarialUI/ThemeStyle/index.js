@@ -62,6 +62,10 @@ const themeButton = createTheme({
                     style: {
                         minWidth: '200px',
                         border: '1px solid',
+                        '&:hover': {
+                            backgroundColor: 'transparent',
+                            color: '#aa1f23',
+                        },
                     },
                 },
             ],

@@ -2,13 +2,15 @@ import classNames from 'classnames/bind';
 import React, { useState } from 'react';
 import { Done, Clear } from '@mui/icons-material';
 import { Button, IconButton, Typography } from '@mui/material';
-import styles from './FormConfirm.module.scss';
 import { useEffect } from 'react';
 import { query, collection, where, getDocs } from 'firebase/firestore';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
+import styles from './FormConfirm.module.scss';
 import { dbFireStore } from '~/Firebase';
 import { CustomComponentMUI } from '~/components/CustomMetarialUI';
 import { PrimaryTypography, themeButton } from '~/components/CustomMetarialUI/ThemeStyle';
-import { useSelector } from 'react-redux';
 const cx = classNames.bind(styles);
 
 const FormConfirm = React.forwardRef(({ handleClose, data }, ref) => {
@@ -16,6 +18,9 @@ const FormConfirm = React.forwardRef(({ handleClose, data }, ref) => {
     //selector
     const appSelector = useSelector((state) => state.app);
     const productSelector = useSelector((state) => state.product);
+    //
+    const navigate = useNavigate();
+
     useEffect(() => {
         const FetchImageURL = async () => {
             const q = query(collection(dbFireStore, 'productAvatar'), where('serial', '==', data.serial));
@@ -51,6 +56,9 @@ const FormConfirm = React.forwardRef(({ handleClose, data }, ref) => {
                     <div
                         className={cx('amount-product-cart')}
                     >{`Have ${appSelector.amountProductCart} product in cart | ${productSelector.totalPrice} $`}</div>
+                    <div className={cx('btn-continue')}>
+                        <button onClick={handleClose}>Continue Shopping</button>
+                    </div>
                     <div className={cx('view-cart-btn')}>
                         <CustomComponentMUI comp={Button} themeCustom={themeButton} variant="redBackground">
                             <CustomComponentMUI
@@ -58,6 +66,9 @@ const FormConfirm = React.forwardRef(({ handleClose, data }, ref) => {
                                 themeCustom={PrimaryTypography}
                                 color="primary"
                                 variant="typeSmall"
+                                onClick={() => {
+                                    navigate('/cart');
+                                }}
                             >
                                 View Cart
                             </CustomComponentMUI>

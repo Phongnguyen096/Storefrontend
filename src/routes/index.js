@@ -5,6 +5,7 @@ import ProductBySubType from '~/pages/Products/components/ProductbySubType';
 import Products from '~/pages/Products';
 import ProductByType from '~/pages/Products/components/ProductByType';
 import Product from '~/pages/Products/components/Product';
+import CartPage from '~/pages/Cart';
 const publicRoutes = [
     { path: '/', component: Home },
     {
@@ -25,6 +26,7 @@ const publicRoutes = [
     },
     { path: '/admin', component: AdminPage },
     { path: '/*', component: Error },
+    { path: '/cart', component: CartPage },
 ];
 
 const privateRoutes = [];
